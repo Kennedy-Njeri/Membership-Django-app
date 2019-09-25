@@ -1,14 +1,13 @@
 from django.db import models
 from django.conf import settings
 from django.db.models.signals import post_save
-
+import stripe
 
 MEMBERSHIP_CHOICES = (
     ('Enterprise', 'ent'),
-    ('Professional', 'pro')
+    ('Professional', 'pro'),
     ('Free', 'free')
 )
-
 
 
 class Membership(models.Model):
@@ -33,9 +32,20 @@ class UserMembership(models.Model):
     def __str__(self):
         return self.user.username
 
-def post_
+
+def post_save_usermembership_create(sender, instance, created, *args, **kwargs):
+    if created:
+        UserMembership.objects.get_or_create(user=instance)
+
+    user_membership, created = UserMembership.objects.get_or_create(user=instance)
+
+    if user_membership.stripe_customer_id is None or user_membership.stripe_customer_id == '':
+        new_customer_id = stripe.Customer.create(email=instance.email)
+        user_membership.stripe_customer_id = new_customer_id['id']
+        user_membership.save()
 
 
+post_save.connect(post_save_usermembership_create, sender=settings.AUTH_USER_MODEL)
 
 
 class Subscription(models.Model):
@@ -45,6 +55,3 @@ class Subscription(models.Model):
 
     def __str__(self):
         return self.user_membership.user.username
-
-
-
