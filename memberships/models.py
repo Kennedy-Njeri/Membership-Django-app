@@ -3,8 +3,6 @@ from django.conf import settings
 from django.db.models.signals import post_save
 import stripe
 
-
-
 MEMBERSHIP_CHOICES = (
     ('Enterprise', 'ent'),
     ('Professional', 'pro'),
