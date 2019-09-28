@@ -36,8 +36,16 @@ class LessonDetailView(View):
 
 
         context = {
-            'object': lesson
+            'object': None
         }
+
+
+        if course_allowed_mem_types.filter(membership_type=user_membership_type).exists():
+
+            context = {
+                'object': lesson
+            }
+
 
         return render(request, 'courses/lesson_detail.html', context)
 
