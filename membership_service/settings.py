@@ -122,7 +122,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATIC_DIRS = [
-    os.path.join(BASE_DIR, 'static_root')
+    os.path.join(BASE_DIR, 'courses/static')
 ]
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
