@@ -5,6 +5,8 @@ from django.views.generic import ListView, DetailView, View
 from memberships.models import UserMembership
 
 
+
+
 class CourseListView(ListView):
     model = Course
     template_name = 'courses/course_list.html'
