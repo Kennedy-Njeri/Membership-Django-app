@@ -12,9 +12,11 @@ class CourseListView(ListView):
     template_name = 'courses/course_list.html'
 
 
+
 class CourseDetailView(DetailView):
     model = Course
     template_name = 'courses/course_detail.html'
+
 
 
 class LessonDetailView(View):
