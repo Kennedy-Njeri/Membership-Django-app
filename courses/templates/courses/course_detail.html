@@ -1,10 +1,13 @@
 {% extends 'courses/base.html' %}
 
+
+
 {% block content %}
 
 <h1>Title:{{ object.title }} </h1>
 
 <h2>Description: {{ object.description }}</h2>
+
 
 
 {% for lesson in object.lessons %}
